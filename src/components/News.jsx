@@ -7,6 +7,9 @@ import { useGetCryptoNewsQuery } from "../services/cryptoNewsApi";
 const { Text, Title } = Typography;
 const { Option } = Select;
 
+const demoImage =
+  "https://www.bing.com/th?id=OVFT.mpzuVZnv8dwIMRfQGPbOPC&pid=News";
+
 const News = (simplified) => {
   const { data: cryptoNews } = useGetCryptoNewsQuery({
     newsCategory: "Cryptocurrency",
@@ -24,7 +27,16 @@ const News = (simplified) => {
               <Title className="news-title" level={4}>
                 {news.name}
               </Title>
+              <img
+                src={news?.image?.thumbnail?.contentUrl || demoImage}
+                alt="news"
+              />
             </div>
+            <p>
+              {news.description > 100
+                ? `${news.description.substring(0, 100)}...`
+                : news.description}
+            </p>
           </a>
         </Col>
       ))}
