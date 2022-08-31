@@ -93,7 +93,40 @@ const CyptoDetails = () => {
     },
   ];
 
-  return <div>CyptoDetails {uuid}</div>;
+  return (
+    <Col className="coin-detail-container">
+      <Col className="coin-heading-container">
+        <Title level={2} className="coin-name">
+          {cryptoDetails.name}({cryptoDetails.slug})
+        </Title>
+        <p>
+          {cryptoDetails.name} live price in US dollars. View value
+          statistic,market cap and supply.
+        </p>
+      </Col>
+      <Select
+        defaultValue="7d"
+        className="select-timeperiod"
+        placeholder="Select Time Period "
+        onChange={(value) => setTimePeriod(value)}
+      >
+        {time.map((date) => (
+          <Option key={date}>{date}</Option>
+        ))}
+      </Select>
+      {/* line chart ... */}
+      <Col className="stats-container">
+        <Col className="coin-value-statistics">
+          <Col className="coin-value-statistics-heading">
+            <Title level={3} className="coin-details-heading">
+              {cryptoDetails.name} Value Statistics
+            </Title>
+            <p>An overview showing the stats of {cryptoDetails.name}</p>
+          </Col>
+        </Col>
+      </Col>
+    </Col>
+  );
 };
 
 export default CyptoDetails;
