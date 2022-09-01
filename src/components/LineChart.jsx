@@ -4,7 +4,7 @@ import { Col, Row, Typography } from "antd";
 
 const { Title } = Typography;
 
-const LineChart = (coinHistory, currentPrice, coinName) => {
+const LineChart = ({ coinHistory, currentPrice, coinName }) => {
   return (
     <>
       <Row className="chart-header">
@@ -15,7 +15,7 @@ const LineChart = (coinHistory, currentPrice, coinName) => {
           <Title level={5} className="price-change">
             {coinHistory?.data?.change}%
           </Title>
-          <Title level={5} className="current-change">
+          <Title level={5} className="current-price">
             Current {coinName} Price:$ {currentPrice}
           </Title>
         </Col>

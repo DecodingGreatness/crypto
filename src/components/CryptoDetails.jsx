@@ -123,11 +123,11 @@ const CryptoDetails = () => {
             <Option key={date}>{date}</Option>
           ))}
         </Select>
-        {/* <LineChart
+        <LineChart
           coinHistory={coinHistory}
           currentPrice={millify(cryptoDetails?.price)}
           coinName={cryptoDetails?.name}
-        /> */}
+        />
         <Col className="stats-container">
           <Col className="coin-value-statistic">
             <Col className="coin-value-statistic-heading">
@@ -180,7 +180,7 @@ const CryptoDetails = () => {
                 <Title level={5} className="link-name">
                   {link.type}
                 </Title>
-                <a href={link.url} target="_blank" rel="noreferr">
+                <a href={link.url} target="_blank" rel="noreferrer">
                   {link.name}
                 </a>
               </Row>
