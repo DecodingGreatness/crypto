@@ -19,11 +19,13 @@ import { useGetCryptoDetailsQuery } from "../services/cryptoApi";
 const { Title, Text } = Typography;
 const { Option } = Select;
 
-const CyptoDetails = () => {
+const CryptoDetails = () => {
   const { uuid } = useParams();
   const [timePeriod, setTimePeriod] = useState("7d");
   const { data, isFetching } = useGetCryptoDetailsQuery(uuid);
   const cryptoDetails = data?.data?.coin;
+
+  console.log(data);
 
   const time = ["3h", "24h", "7d", "30d", "1y", "3m", "3y", "5y"];
 
@@ -97,31 +99,39 @@ const CyptoDetails = () => {
     <Col className="coin-detail-container">
       <Col className="coin-heading-container">
         <Title level={2} className="coin-name">
-          {cryptoDetails.name}({cryptoDetails.slug})
+          {cryptoDetails.name} ({cryptoDetails.symbol}) Price
         </Title>
         <p>
-          {cryptoDetails.name} live price in US dollars. View value
-          statistic,market cap and supply.
+          {cryptoDetails.name} live price in US dollars. View value statistics,
+          marketcap and supply
         </p>
-      </Col>
-      <Select
-        defaultValue="7d"
-        className="select-timeperiod"
-        placeholder="Select Time Period "
-        onChange={(value) => setTimePeriod(value)}
-      >
-        {time.map((date) => (
-          <Option key={date}>{date}</Option>
-        ))}
-      </Select>
-      {/* line chart ... */}
-      <Col className="stats-container">
-        <Col className="coin-value-statistics">
-          <Col className="coin-value-statistics-heading">
-            <Title level={3} className="coin-details-heading">
-              {cryptoDetails.name} Value Statistics
-            </Title>
-            <p>An overview showing the stats of {cryptoDetails.name}</p>
+        <Select
+          defaultValue="7d"
+          className="select-timeperiod"
+          placeholder="Select Time Period"
+          onChange={(value) => setTimePeriod(value)}
+        >
+          {time.map((date) => (
+            <Option key={date}>{date}</Option>
+          ))}
+        </Select>
+        <Col className="stats-container">
+          <Col className="coin-value-statistic">
+            <Col className="coin-value-statistic-heading">
+              <Title level={3} className="coin-details-heading">
+                {cryptoDetails.name} Value Statistics
+              </Title>
+              <p>An overview showing the stats of {cryptoDetails.name}</p>
+            </Col>
+            {stats.map(({ icon, title, value }) => (
+              <Col className="coin-stats">
+                <Col className="coin-stats-name">
+                  <Text>{icon}</Text>
+                  <Text>{title}</Text>
+                </Col>
+                <Text className="stats">{value}</Text>
+              </Col>
+            ))}
           </Col>
         </Col>
       </Col>
@@ -129,4 +139,4 @@ const CyptoDetails = () => {
   );
 };
 
-export default CyptoDetails;
+export default CryptoDetails;
