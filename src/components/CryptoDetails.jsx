@@ -19,6 +19,7 @@ import {
   useGetCryptoHistoryQuery,
 } from "../services/cryptoApi";
 import LineChart from "./LineChart";
+import Loader from "./Loader";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -30,7 +31,7 @@ const CryptoDetails = () => {
   const { data: coinHistory } = useGetCryptoHistoryQuery({ uuid, timePeriod });
   const cryptoDetails = data?.data?.coin;
 
-  if (isFetching) return "loading...";
+  if (isFetching) return <Loader />;
 
   console.log(data);
   console.log(timePeriod);
@@ -46,7 +47,9 @@ const CryptoDetails = () => {
     { title: "Rank", value: cryptoDetails?.rank, icon: <NumberOutlined /> },
     {
       title: "24h Volume",
-      value: `$ ${cryptoDetails?.volume && millify(cryptoDetails?.volume)}`,
+      value: `$ ${
+        cryptoDetails?.["24hVolume"] && millify(cryptoDetails?.["24hVolume"])
+      }`,
       icon: <ThunderboltOutlined />,
     },
     {
